@@ -1,0 +1,19 @@
+{
+	"name": "xcode build server",
+	"version": "0.2",
+	"bspVersion": "2.0",
+	"languages": [
+		"c",
+		"cpp",
+		"objective-c",
+		"objective-cpp",
+		"swift"
+	],
+	"argv": [
+		"/opt/homebrew/bin/xcode-build-server"
+	],
+	"workspace": "/Users/tuildes/Developer/2025-7 Nano 01/timento.xcodeproj/project.xcworkspace",
+	"build_root": "/Users/tuildes/Library/Developer/Xcode/DerivedData/timento-ehydyswboslwteemfxghynuskeol",
+	"scheme": "timento",
+	"kind": "xcode"
+}

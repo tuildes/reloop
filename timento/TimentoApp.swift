@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct sei_laApp: App {
+struct TimentoApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
