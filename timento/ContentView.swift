@@ -31,7 +31,9 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            StartView(motionEnabled: motionManager.motionEnabled)
+            // StartView(motionEnabled: motionManager.motionEnabled)
+            GameView()
+            // EndingView(ending: EndingModel.all[0])
         }
         // VStack{
         //     Text("Testando")
@@ -44,8 +46,5 @@ struct ContentView: View {
         //     Button("reset") {
         //         motionManager.resetAngle()
         //     }
-        // }
-
-        // EndingView(ending: EndingModel.all[0])
     }
 }
