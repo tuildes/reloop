@@ -2,18 +2,18 @@ import Foundation
 struct LevelModel: Identifiable {
     let id: UUID = UUID()
 
-    let year: Int
+    let name: String
     let backgroundImage: String
 
-    init(_ year: Int, _ backgroundImage: String) {
-        self.year = year
+    init(_ name: String, _ backgroundImage: String) {
+        self.name = name
         self.backgroundImage = backgroundImage
     }
 }
 
 extension LevelModel {
-    static let years: [LevelModel] = [
-        LevelModel(2025, "bg")
+    static let levels: [LevelModel] = [
+        LevelModel("2025", "placeholder")
     ]
 
     private static let sequences: [SequenceModel] = [
@@ -66,7 +66,7 @@ extension LevelModel {
             ],
             choose: ChooseModel("Choose an action", [
                 SingleChoose(0, "Action 1", "Do something exciting!", "cat.fill", 5),
-                SingleChoose(1, "Action 2", "Take a different path.", "cat.fill", 4, true)
+                SingleChoose(1, "Action 2", "Acabar", "cat.fill", 0, true)
             ])
         ),
         SequenceModel(
@@ -77,8 +77,8 @@ extension LevelModel {
                 SpeechModel("Character 2", "Choose wisely!")
             ],
             choose: ChooseModel("Choose an action", [
-                SingleChoose(0, "Action 1", "Do something exciting!", "cat.fill", 2, true),
-                SingleChoose(1, "Action 2", "Take a different path.", "cat.fill", 2, true)
+                SingleChoose(0, "Action 1", "Acabar", "cat.fill", 1, true),
+                SingleChoose(1, "Action 2", "Acabar.", "cat.fill", 1, true)
             ])
         )
     ]

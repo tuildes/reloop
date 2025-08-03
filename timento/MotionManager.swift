@@ -1,4 +1,10 @@
 import CoreMotion
+import SwiftUI
+
+func vibrate(style: UIImpactFeedbackGenerator.FeedbackStyle) -> Void {
+    let generator: UIImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: style)
+    generator.impactOccurred()
+}
 
 class MotionManager: ObservableObject {
     private let motionManager: CMMotionManager = CMMotionManager()
@@ -54,7 +60,12 @@ class MotionManager: ObservableObject {
 
             // Limitar o angulo atual ao maximo permitido
             if (self.maxAngle != 0.0 && abs(self.actualAngle + deltaYaw) < self.maxAngle) {
-                self.actualAngle += deltaYaw
+                withAnimation {
+                    self.actualAngle += deltaYaw
+                }
+                if (trunc(fabs(self.actualAngle)) == 15) {
+                    vibrate(style: .medium)
+                }
             }
         }
     }
@@ -66,7 +77,7 @@ class MotionManager: ObservableObject {
     }
 
     func getYAngle() -> Float {
-        return Float(actualAngle * .pi / 180)
+        return Float(-actualAngle * .pi / 180)
     }
 
     deinit {

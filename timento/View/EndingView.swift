@@ -1,7 +1,10 @@
 import SwiftUI
 
 struct EndingView: View {
+    @Binding var path: NavigationPath
     let ending: EndingModel
+
+    @Environment(\.dismiss) private var dismiss: DismissAction
 
     var body: some View {
         ZStack {
@@ -33,17 +36,11 @@ struct EndingView: View {
 
                 // Botoes de SAIR e ESCOLHER NOVAMENTE
                 HStack {
-                    Button("Sair") {
-                        // Ação de sair
-                    }
-                    .padding()
-
                     Spacer()
-
-                    Button("Escolher novamente") {
-                        // Ação de escolher novamente
+                    Button("Sair") {
+                        dismiss()
                     }
-                    .padding()
+                    .foregroundStyle(.white)
                 }
             }
             .padding(32)

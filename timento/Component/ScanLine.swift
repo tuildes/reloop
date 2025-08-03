@@ -9,8 +9,9 @@ struct ScanLine: View {
                 width: UIScreen.main.bounds.width,
                 height: UIScreen.main.bounds.height
             )
-            .opacity(0.5)
+            // .opacity(0.5)
             .ignoresSafeArea()
             .blendMode(.overlay)
+            .allowsHitTesting(false)
     }
 }

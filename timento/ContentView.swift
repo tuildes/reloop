@@ -7,44 +7,15 @@
 
 import SwiftUI
 
-enum ChooseType: String {
-    case chooseOne = "Escolha um"
-    case chooseTwo = "Escolha dois"
-    case chooseThree = "Sem escolha"
-}
-
-func chooseModel(_ angle: Double) -> ChooseType {
-    switch angle {
-    case -180..<(-25):
-        return .chooseOne
-    case (-25)..<25:
-        return .chooseThree
-    case 25..<180:
-        return .chooseTwo
-    default:
-        fatalError("Range de angulo não reconhecido: \(angle)")
-    }
-}
-
 struct ContentView: View {
-    @StateObject private var motionManager: MotionManager = MotionManager()
-
+    @State private var path: NavigationPath = NavigationPath()
     var body: some View {
-        NavigationStack {
-            // StartView(motionEnabled: motionManager.motionEnabled)
-            GameView()
-            // EndingView(ending: EndingModel.all[0])
+        NavigationStack(path: $path) {
+            StartView(path: $path)
+                .navigationDestination(for: String.self) { i in
+                    EndingView(path: $path, ending: EndingModel.all[Int(i) ?? 0])
+                        .navigationBarBackButtonHidden()
+                }
         }
-        // VStack{
-        //     Text("Testando")
-
-        //     RotationItemView(rotationAngle: motionManager.getYAngle(),
-        //                      modelName: "toy_biplane_realistic.usdz")
-
-        //     Text(chooseModel(motionManager.actualAngle).rawValue)
-
-        //     Button("reset") {
-        //         motionManager.resetAngle()
-        //     }
     }
 }
