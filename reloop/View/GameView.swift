@@ -25,16 +25,17 @@ func opacityValue(_ angle: Double) -> Double {
 struct GameView: View {
     @Binding var path: NavigationPath
 
+    // Todos os levels
     let levels: [LevelModel] = LevelModel.levels
 
     // Motion Device Manager
     @StateObject private var motionManager: MotionManager = MotionManager()
 
+    // Variaveis de estancias dos levels, falas e escolhas
     @State private var actualSequence: Int = 0
     @State private var actualSequenceModel: SequenceModel = LevelModel.startSequence()
     @State private var actualSpeech: Int = 0
     @State private var actualLevel: Int = 0
-
 
     var body: some View {
             ZStack {
@@ -57,16 +58,43 @@ struct GameView: View {
                 VStack {
                     HStack{
                         Text(levels[actualLevel].name)
-                        Spacer()
-                        Button { // Reset de giroscopio
-                            motionManager.resetAngle()
-                        } label: {
-                            Image(systemName: "arrow.circlepath")
-                                .imageScale(.large)
+                        if actualSpeech == actualSequenceModel.speech.count {
+                            if let choose: ChooseModel = actualSequenceModel.choose {
+                                Spacer()
+                                Text(choose.chooseTitle)
+                            }
                         }
-                        .foregroundStyle(.white)
-                        .buttonBorderShape(.circle)
-                        .buttonStyle(.bordered)
+                        Spacer()
+                        if (motionManager.motionEnabled) {
+                            Button { // Reset de giroscopio
+                                motionManager.resetAngle()
+                            } label: {
+                                Image(systemName: "arrow.circlepath")
+                                    .imageScale(.large)
+                            }
+                            .foregroundStyle(.white)
+                            .buttonBorderShape(.circle)
+                            .buttonStyle(.bordered)
+
+                        } else { // Caso nao tenha giroscopio cria botoes para interacao
+                            Button {
+                                motionManager.actualAngle += 10
+                            } label: {
+                                Image(systemName: "arrow.left")
+                                    .imageScale(.large)
+                            }
+                            .disabled(trunc(motionManager.actualAngle) >= 40)
+                            .foregroundStyle(.white)
+
+                            Button {
+                                motionManager.actualAngle -= 10
+                            } label: {
+                                Image(systemName: "arrow.right")
+                                    .imageScale(.large)
+                            }
+                            .disabled(trunc(motionManager.actualAngle) <= -40)
+                            .foregroundStyle(.white)
+                        }
                     }
 
                     Spacer()
@@ -118,6 +146,11 @@ struct GameView: View {
                         .contentShape(Rectangle()) // Permitir onTapGesture em todo o bloco
                         .onTapGesture {
                             if (actualSpeech == (actualSequenceModel.speech.count - 1)) {
+                                // Se for a ultima fala, puxa o ultimo final
+                                if (actualSequence == LevelModel.sequenceLastIndex()) {
+                                    path.append(String(3))
+                                }
+
                                 // Verifica se vai ter um botao de escolha
                                 if (actualSequenceModel.choose != nil) {
                                     withAnimation {

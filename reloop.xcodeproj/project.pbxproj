@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		88D9559B2E37AE6600AF54AD /* timento.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = timento.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		88D9559B2E37AE6600AF54AD /* reloop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = reloop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		88D9559D2E37AE6600AF54AD /* timento */ = {
+		88D9559D2E37AE6600AF54AD /* reloop */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = timento;
+			path = reloop;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,7 +32,7 @@
 		88D955922E37AE6600AF54AD = {
 			isa = PBXGroup;
 			children = (
-				88D9559D2E37AE6600AF54AD /* timento */,
+				88D9559D2E37AE6600AF54AD /* reloop */,
 				88D9559C2E37AE6600AF54AD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -40,7 +40,7 @@
 		88D9559C2E37AE6600AF54AD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				88D9559B2E37AE6600AF54AD /* timento.app */,
+				88D9559B2E37AE6600AF54AD /* reloop.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		88D9559A2E37AE6600AF54AD /* timento */ = {
+		88D9559A2E37AE6600AF54AD /* reloop */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 88D955A62E37AE6700AF54AD /* Build configuration list for PBXNativeTarget "timento" */;
+			buildConfigurationList = 88D955A62E37AE6700AF54AD /* Build configuration list for PBXNativeTarget "reloop" */;
 			buildPhases = (
 				88D955972E37AE6600AF54AD /* Sources */,
 				88D955982E37AE6600AF54AD /* Frameworks */,
@@ -61,13 +61,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				88D9559D2E37AE6600AF54AD /* timento */,
+				88D9559D2E37AE6600AF54AD /* reloop */,
 			);
-			name = timento;
+			name = reloop;
 			packageProductDependencies = (
 			);
 			productName = "sei la";
-			productReference = 88D9559B2E37AE6600AF54AD /* timento.app */;
+			productReference = 88D9559B2E37AE6600AF54AD /* reloop.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 88D955962E37AE6600AF54AD /* Build configuration list for PBXProject "timento" */;
+			buildConfigurationList = 88D955962E37AE6600AF54AD /* Build configuration list for PBXProject "reloop" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				88D9559A2E37AE6600AF54AD /* timento */,
+				88D9559A2E37AE6600AF54AD /* reloop */,
 			);
 		};
 /* End PBXProject section */
@@ -313,7 +313,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		88D955962E37AE6600AF54AD /* Build configuration list for PBXProject "timento" */ = {
+		88D955962E37AE6600AF54AD /* Build configuration list for PBXProject "reloop" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				88D955A42E37AE6700AF54AD /* Debug */,
@@ -322,7 +322,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		88D955A62E37AE6700AF54AD /* Build configuration list for PBXNativeTarget "timento" */ = {
+		88D955A62E37AE6700AF54AD /* Build configuration list for PBXNativeTarget "reloop" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				88D955A72E37AE6700AF54AD /* Debug */,

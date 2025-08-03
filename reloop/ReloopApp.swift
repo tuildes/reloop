@@ -4,11 +4,9 @@
 //
 //  Created by Gustavo Benitez Frehse on 28/07/25.
 //
-
 import SwiftUI
-
 @main
-struct TimentoApp: App {
+struct ReloopApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

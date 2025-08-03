@@ -12,8 +12,8 @@
 	"argv": [
 		"/opt/homebrew/bin/xcode-build-server"
 	],
-	"workspace": "/Users/tuildes/Developer/2025-7 Nano 01/timento.xcodeproj/project.xcworkspace",
-	"build_root": "/Users/tuildes/Library/Developer/Xcode/DerivedData/timento-ehydyswboslwteemfxghynuskeol",
-	"scheme": "timento",
+	"workspace": "/Users/tuildes/Developer/2025-8 ReLoop/reloop.xcodeproj/project.xcworkspace",
+	"build_root": "/Users/tuildes/Library/Developer/Xcode/DerivedData/reloop-bdbsktsvkvsuhbfksbwvmgcxvhvr",
+	"scheme": "reloop",
 	"kind": "xcode"
 }
