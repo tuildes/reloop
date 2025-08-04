@@ -15,7 +15,7 @@ struct EndingView: View {
                 .edgesIgnoringSafeArea(.all)
 
             VStack {
-                Text("Final \(ending.id): **\(ending.name)**")
+                Text("Final \((ending.id + 1)): **\(ending.name)**")
                     .font(.largeTitle)
                     .foregroundStyle(.white)
                     .padding()

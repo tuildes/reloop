@@ -3,6 +3,8 @@ import SwiftUI
 struct StartView: View {
     @Binding var path: NavigationPath
 
+    let version: String = "1.0"
+
     var body: some View {
         ZStack {
             // Image background
@@ -54,11 +56,11 @@ struct StartView: View {
             VStack(alignment: .leading) {
                 Spacer()
                 HStack {
-                    Text("Versao 0.1")
+                    Text(version)
                         .foregroundStyle(.appBackground)
                     Spacer()
                 }
-                .padding(.horizontal, 24)
+                .padding(.leading, 36)
                 .padding(.bottom, 4)
             }
 

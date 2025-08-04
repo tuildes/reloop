@@ -7,12 +7,18 @@ func ChooseBox(_ choose: SingleChoose, _ angle: Double) -> some View {
 
         Text(choose.title)
             .font(.title2)
+            .multilineTextAlignment(.center)
             .bold()
 
-        Text(choose.description)
+        if (!choose.description.isEmpty) {
+            Text(choose.description)
+                .font(.caption)
+                .multilineTextAlignment(.center)
+        }
     }
-    .scaleEffect(angle + 0.25)
+    .scaleEffect(angle + 0.1)
     .opacity(angle)
+    .frame(maxWidth: 250)
 }
 
 func opacityValue(_ angle: Double) -> Double {
@@ -51,17 +57,20 @@ struct GameView: View {
                         rotationAngle: motionManager.getYAngle(),
                         modelName: actualSequenceModel.modelName
                     )
+                    .scaleEffect(0.75)
                     Spacer()
                 }
 
                 // HUD
                 VStack {
                     HStack{
-                        Text(levels[actualLevel].name)
                         if actualSpeech == actualSequenceModel.speech.count {
                             if let choose: ChooseModel = actualSequenceModel.choose {
                                 Spacer()
                                 Text(choose.chooseTitle)
+                                    .bold()
+                                    .font(.title3)
+                                    .foregroundStyle(.appSecondary)
                             }
                         }
                         Spacer()
@@ -78,7 +87,9 @@ struct GameView: View {
 
                         } else { // Caso nao tenha giroscopio cria botoes para interacao
                             Button {
-                                motionManager.actualAngle += 10
+                                withAnimation {
+                                    motionManager.actualAngle += 10
+                                }
                             } label: {
                                 Image(systemName: "arrow.left")
                                     .imageScale(.large)
@@ -87,7 +98,9 @@ struct GameView: View {
                             .foregroundStyle(.white)
 
                             Button {
-                                motionManager.actualAngle -= 10
+                                withAnimation {
+                                    motionManager.actualAngle -= 10
+                                }
                             } label: {
                                 Image(systemName: "arrow.right")
                                     .imageScale(.large)
@@ -112,7 +125,7 @@ struct GameView: View {
                             Spacer()
 
                             if (trunc(fabs(motionManager.actualAngle)) >= 15) {
-                                Button("Escolher") {
+                                Button {
                                     let chooseIndex: Int = trunc(motionManager.actualAngle) > 15 ? 0 : 1
 
                                     if (choose.chooses[chooseIndex].isNextSequenceEnding) {
@@ -124,59 +137,50 @@ struct GameView: View {
                                             actualSpeech = 0
                                         }
                                     }
+                                } label: {
+                                    Text("Escolher \(trunc(motionManager.actualAngle) >= 15 ? "esquerda" : "Direita")")
+                                        .bold()
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .frame(maxWidth: .infinity)
+                                        .background(.appTertiary.opacity(0.25))
+                                        .cornerRadius(10)
                                 }
-                                .padding(.bottom, 24)
+                                .padding(.bottom, 16)
                             }
                         }
                     }
 
                     // Caixa de texto
                     if (actualSpeech < actualSequenceModel.speech.count) {
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(actualSequenceModel.speech[actualSpeech].character)
-                                    .font(.title3)
-                                    .bold()
-                                Text(actualSequenceModel.speech[actualSpeech].text)
-                            }
-                            Spacer()
-                        }
-                        .padding()
-                        .foregroundStyle(.white)
-                        .contentShape(Rectangle()) // Permitir onTapGesture em todo o bloco
-                        .onTapGesture {
-                            if (actualSpeech == (actualSequenceModel.speech.count - 1)) {
-                                // Se for a ultima fala, puxa o ultimo final
-                                if (actualSequence == LevelModel.sequenceLastIndex()) {
-                                    path.append(String(3))
-                                }
+                        TextContent(character: actualSequenceModel.speech[actualSpeech].character, text: actualSequenceModel.speech[actualSpeech].text)
+                            .onTapGesture {
+                                if (actualSpeech == (actualSequenceModel.speech.count - 1)) {
+                                    // Se for a ultima fala, puxa o ultimo final
+                                    if (actualSequence == LevelModel.sequenceLastIndex()) {
+                                        path.append(String(3))
+                                    }
 
-                                // Verifica se vai ter um botao de escolha
-                                if (actualSequenceModel.choose != nil) {
+                                    // Verifica se vai ter um botao de escolha
+                                    if (actualSequenceModel.choose != nil) {
+                                        withAnimation {
+                                            actualSpeech += 1
+                                        }
+
+                                    // Sem botao de escolha (proxima sequencia)
+                                    } else {
+                                        withAnimation {
+                                            actualSequenceModel = LevelModel.nextSequence(actualSequence)
+                                            actualSequence = actualSequenceModel.id
+                                            actualSpeech = 0
+                                        }
+                                    }
+                                } else if (actualSpeech < (actualSequenceModel.speech.count - 1)) {
                                     withAnimation {
                                         actualSpeech += 1
                                     }
-
-                                // Sem botao de escolha (proxima sequencia)
-                                } else {
-                                    withAnimation {
-                                        actualSequenceModel = LevelModel.nextSequence(actualSequence)
-                                        actualSequence = actualSequenceModel.id
-                                        actualSpeech = 0
-                                    }
-                                }
-                            } else if (actualSpeech < (actualSequenceModel.speech.count - 1)) {
-                                withAnimation {
-                                    actualSpeech += 1
                                 }
                             }
-                        }
-                        .background {
-                            Rectangle()
-                                .foregroundStyle(.thinMaterial)
-                                .cornerRadius(8)
-                                .opacity(0.8)
-                        }
                     }
                 }
                 .padding(.top, 36)

@@ -40,8 +40,8 @@ extension EndingModel {
                 você pode existir, contemple o eterno vazio.
                 """,
             hint: "Hint 1",
-            modelName: "toy_biplane_realistic.usdz",
-            backgroundImage: "placeholder"
+            modelName: "pc_robot.usdz",
+            backgroundImage: "4"
         ),
         EndingModel( // Final exemplo (4)
             id: 1,
@@ -56,8 +56,8 @@ extension EndingModel {
                 você pode existir, contemple o eterno vazio.
                 """,
             hint: "Hint 1",
-            modelName: "toy_biplane_realistic.usdz",
-            backgroundImage: "placeholder"
+            modelName: "pc_error.usdz",
+            backgroundImage: "4"
         ),
         EndingModel( // Final exemplo (4)
             id: 2,
@@ -72,24 +72,21 @@ extension EndingModel {
                 você pode existir, contemple o eterno vazio.
                 """,
             hint: "Hint 1",
-            modelName: "toy_biplane_realistic.usdz",
-            backgroundImage: "placeholder"
+            modelName: "blank.usdz",
+            backgroundImage: "4"
         ),
         EndingModel( // Final exemplo (4)
             id: 3,
-            name: "Ciclo eterno (FINAL VERDADEIRO)",
+            name: "Ciclo eterno",
             description:
                 """
-                Você não fez nada, as inconsistências do tempo destruíram seu mundo,
-                você navega no eterno nada
-
-                O tempo não existe mais, o eterno é o único estado possível,
-                você não pode mais fazer nada, você não pode mais ser nada,
-                você pode existir, contemple o eterno vazio.
+                Você descobriu o porque agora
+                Você está fadado a seguir este eterno ciclo
+                [FINAL VERDADEIRO]
                 """,
             hint: "Hint 1",
-            modelName: "toy_biplane_realistic.usdz",
-            backgroundImage: "placeholder"
+            modelName: "clock.usdz",
+            backgroundImage: "4"
         ),
     ]
 }
