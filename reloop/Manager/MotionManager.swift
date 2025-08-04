@@ -48,13 +48,6 @@ class MotionManager: ObservableObject {
                 deltaYaw = 0.0
             }
 
-            // Arruma o angulo para ficar entre -180 e 180 graus
-            if (deltaYaw > 180) {
-                deltaYaw -= 360
-            } else if (deltaYaw < -180) {
-                deltaYaw += 360
-            }
-
             // Atualizacao de estados
             self.previousYaw = currentYaw
 
@@ -63,7 +56,7 @@ class MotionManager: ObservableObject {
                 withAnimation {
                     self.actualAngle += deltaYaw
                 }
-                if (trunc(fabs(self.actualAngle)) == 15) {
+                if (trunc(fabs(self.actualAngle)) == 15 && (fabs(deltaYaw) > 0.1)) {
                     vibrate(style: .medium)
                 }
             }
