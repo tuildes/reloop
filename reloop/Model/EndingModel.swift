@@ -41,7 +41,7 @@ extension EndingModel {
                 """,
             hint: "Hint 1",
             modelName: "pc_robot.usdz",
-            backgroundImage: "4"
+            backgroundImage: "bg4"
         ),
         EndingModel( // Final exemplo (4)
             id: 1,
@@ -57,7 +57,7 @@ extension EndingModel {
                 """,
             hint: "Hint 1",
             modelName: "pc_error.usdz",
-            backgroundImage: "4"
+            backgroundImage: "bg4"
         ),
         EndingModel( // Final exemplo (4)
             id: 2,
@@ -73,7 +73,7 @@ extension EndingModel {
                 """,
             hint: "Hint 1",
             modelName: "blank.usdz",
-            backgroundImage: "4"
+            backgroundImage: "bg4"
         ),
         EndingModel( // Final exemplo (4)
             id: 3,
@@ -86,7 +86,7 @@ extension EndingModel {
                 """,
             hint: "Hint 1",
             modelName: "clock.usdz",
-            backgroundImage: "4"
+            backgroundImage: "bg4"
         ),
     ]
 }

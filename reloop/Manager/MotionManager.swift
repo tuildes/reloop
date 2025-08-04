@@ -7,12 +7,14 @@ func vibrate(style: UIImpactFeedbackGenerator.FeedbackStyle) -> Void {
 }
 
 class MotionManager: ObservableObject {
+    // Variaveis locais de controle
     private let motionManager: CMMotionManager = CMMotionManager()
-
     private var previousYaw: Double = 0.0
     private var maxAngle: Double = 45.0
-    @Published var motionEnabled: Bool = true
-    @Published var actualAngle: Double = 0.0
+
+    // Variaveis de acesso
+    @Published public var motionEnabled: Bool = true
+    @Published public var actualAngle: Double = 0.0
 
     init() {
         motionManager.deviceMotionUpdateInterval = 0.1 / 60.0 // 60 FPS
@@ -32,7 +34,6 @@ class MotionManager: ObservableObject {
         motionManager.startDeviceMotionUpdates(to: .main) { [weak self] motionData, error in
             guard let self: MotionManager = self, let motionData: CMDeviceMotion = motionData else { return }
 
-            // Verificar erros de motion
             if let error: any Error = error {
                 print("Erro: \(error.localizedDescription)")
                 return
@@ -56,6 +57,8 @@ class MotionManager: ObservableObject {
                 withAnimation {
                     self.actualAngle += deltaYaw
                 }
+
+                // Vibra caso
                 if (trunc(fabs(self.actualAngle)) == 15 && (fabs(deltaYaw) > 0.1)) {
                     vibrate(style: .medium)
                 }
@@ -63,13 +66,15 @@ class MotionManager: ObservableObject {
         }
     }
 
+    // Reseta angulo e orientacao do objeto (debug)
     func resetAngle(_ maxAngle: Double = 45.0) {
         self.previousYaw = 0.0
         self.actualAngle = 0.0
         self.maxAngle = maxAngle
     }
 
-    func getYAngle() -> Float {
+    // Retorna o angulo naturalizado
+    func getAngle() -> Float {
         return Float(-actualAngle * .pi / 180)
     }
 

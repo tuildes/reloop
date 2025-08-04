@@ -13,10 +13,10 @@ struct LevelModel: Identifiable {
 
 extension LevelModel {
     static let levels: [LevelModel] = [
-        LevelModel("2010", "1"),
-        LevelModel("1980", "2"),
-        LevelModel("2080", "3"),
-        LevelModel("???", "4")
+        LevelModel("2010", "bg1"),
+        LevelModel("1980", "bg2"),
+        LevelModel("2080", "bg4"),
+        LevelModel("???", "bg4")
     ]
 
     private static let sequences: [SequenceModel] = [
@@ -60,8 +60,8 @@ extension LevelModel {
                 SpeechModel("Você", "Parece que tem um cartaz que a figura tera mencionado"),
             ],
             choose: ChooseModel("Olhar o cartaz?", [
-                SingleChoose(0, "Não", "", "checkmark", 5),
-                SingleChoose(1, "Sim", "", "x.circle.fill", 4)
+                SingleChoose(0, "Não", "", "x.circle.fill", 5),
+                SingleChoose(1, "Sim", "", "checkmark", 4)
             ]),
             yearID: 1
         ),

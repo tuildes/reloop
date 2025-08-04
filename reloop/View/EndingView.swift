@@ -26,6 +26,7 @@ struct EndingView: View {
                     RotationItemView(rotationAngle: (20 * .pi / 180), modelName: ending.modelName)
                         .frame(width: 200, height: 200)
                         .padding()
+                        .scaleEffect(1.5)
 
                     Text(ending.description)
                         .padding()

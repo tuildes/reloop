@@ -48,6 +48,18 @@ struct StartView: View {
                         .bold()
                         .foregroundStyle(.appBackground)
                         .opacity(0.2)
+
+                    Text("Créditos")
+                        .font(.system(size: 24))
+                        .bold()
+                        .foregroundStyle(.appBackground)
+                        .opacity(0.2)
+
+                    Text("Trocar idioma: PT-BR")
+                        .font(.system(size: 24))
+                        .bold()
+                        .foregroundStyle(.appBackground)
+                        .opacity(0.2)
                 }
             }
             .padding(64)

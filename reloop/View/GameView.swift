@@ -54,16 +54,21 @@ struct GameView: View {
                 VStack {
                     Spacer()
                     RotationItemView(
-                        rotationAngle: motionManager.getYAngle(),
+                        rotationAngle: motionManager.getAngle(),
                         modelName: actualSequenceModel.modelName
                     )
-                    .scaleEffect(0.75)
+                    .offset(y: 10)
                     Spacer()
                 }
 
                 // HUD
                 VStack {
                     HStack{
+                        HStack{
+                            Text(levels[actualLevel].name)
+                        }
+                        .frame(width: 60)
+
                         if actualSpeech == actualSequenceModel.speech.count {
                             if let choose: ChooseModel = actualSequenceModel.choose {
                                 Spacer()
@@ -84,29 +89,33 @@ struct GameView: View {
                             .foregroundStyle(.white)
                             .buttonBorderShape(.circle)
                             .buttonStyle(.bordered)
+                            .frame(width: 60)
 
                         } else { // Caso nao tenha giroscopio cria botoes para interacao
-                            Button {
-                                withAnimation {
-                                    motionManager.actualAngle += 10
+                            HStack {
+                                Button {
+                                    withAnimation {
+                                        motionManager.actualAngle += 10
+                                    }
+                                } label: {
+                                    Image(systemName: "arrow.left")
+                                        .imageScale(.large)
                                 }
-                            } label: {
-                                Image(systemName: "arrow.left")
-                                    .imageScale(.large)
-                            }
-                            .disabled(trunc(motionManager.actualAngle) >= 40)
-                            .foregroundStyle(.white)
+                                .disabled(trunc(motionManager.actualAngle) >= 40)
+                                .foregroundStyle(.white)
 
-                            Button {
-                                withAnimation {
-                                    motionManager.actualAngle -= 10
+                                Button {
+                                    withAnimation {
+                                        motionManager.actualAngle -= 10
+                                    }
+                                } label: {
+                                    Image(systemName: "arrow.right")
+                                        .imageScale(.large)
                                 }
-                            } label: {
-                                Image(systemName: "arrow.right")
-                                    .imageScale(.large)
+                                .disabled(trunc(motionManager.actualAngle) <= -40)
+                                .foregroundStyle(.white)
                             }
-                            .disabled(trunc(motionManager.actualAngle) <= -40)
-                            .foregroundStyle(.white)
+                            .frame(width: 60)
                         }
                     }
 
@@ -134,6 +143,7 @@ struct GameView: View {
                                         withAnimation {
                                             actualSequenceModel = LevelModel.chooseSequence(actualSequenceModel, choose.chooses[chooseIndex].id)
                                             actualSequence = actualSequenceModel.id
+                                            actualLevel = actualSequenceModel.yearID
                                             actualSpeech = 0
                                         }
                                     }
@@ -171,6 +181,7 @@ struct GameView: View {
                                     } else {
                                         withAnimation {
                                             actualSequenceModel = LevelModel.nextSequence(actualSequence)
+                                            actualLevel = actualSequenceModel.yearID
                                             actualSequence = actualSequenceModel.id
                                             actualSpeech = 0
                                         }
