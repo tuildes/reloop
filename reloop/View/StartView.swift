@@ -3,7 +3,7 @@ import SwiftUI
 struct StartView: View {
     @Binding var path: NavigationPath
 
-    let version: String = "1.0"
+    let version: String = "1.2"
 
     var body: some View {
         ZStack {
