@@ -19,9 +19,42 @@ func characterColor(_ character: String) -> Color {
     }
 }
 
+extension EnvironmentValues {
+    @Entry var highlightColor: Color = .accentColor
+}
+
 struct TextContent: View {
-    let character: String
-    let text: String
+    @Environment(\.highlightColor) var HighlightColor: Color // Variavel de estado para as cores
+    let character: String // Personagem
+    let text: String // Texto a ser formatado
+
+    private var attributedString: AttributedString {
+        formatText()
+    }
+
+    init(_ character: String, _ text: String) {
+        self.text = text
+        self.character = character
+    }
+
+    private func formatText() -> AttributedString {
+        var result: AttributedString = AttributedString()
+        let _allText: [String.SubSequence] = text.split(separator: "~", omittingEmptySubsequences: false)
+
+        for (index, _text) in _allText.enumerated() {
+            var attributedText: AttributedString = AttributedString(_text)
+
+            // Formatar secoes do separador
+            if (index % 2 != 0) {
+                attributedText.foregroundColor = HighlightColor
+                attributedText.font = .boldSystemFont(ofSize: 16)
+            }
+
+            result.append(attributedText)
+        }
+
+        return result
+    }
 
     var body: some View {
         HStack {
@@ -30,7 +63,7 @@ struct TextContent: View {
                     .font(.title3)
                     .bold()
                     .foregroundStyle(characterColor(character))
-                Text(text)
+                Text(attributedString)
             }
             Spacer()
         }

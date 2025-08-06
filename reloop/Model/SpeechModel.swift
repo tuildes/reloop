@@ -1,14 +1,15 @@
 import Foundation
+import SwiftUI
 struct SpeechModel: Identifiable {
     let id: UUID = UUID()
 
     let character: String
     let text: String
-    let special: Bool
+    let color: Color
 
-    init(_ character: String, _ text: String, _ special: Bool = false) {
+    init(_ character: String, _ text: String, _ color: Color = .appSecondary) {
         self.character = character
         self.text = text
-        self.special = special
+        self.color = color
     }
 }

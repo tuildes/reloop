@@ -163,7 +163,8 @@ struct GameView: View {
 
                     // Caixa de texto
                     if (actualSpeech < actualSequenceModel.speech.count) {
-                        TextContent(character: actualSequenceModel.speech[actualSpeech].character, text: actualSequenceModel.speech[actualSpeech].text)
+                        TextContent(actualSequenceModel.speech[actualSpeech].character, actualSequenceModel.speech[actualSpeech].text)
+                            .environment(\.highlightColor, actualSequenceModel.speech[actualSpeech].color)
                             .onTapGesture {
                                 if (actualSpeech == (actualSequenceModel.speech.count - 1)) {
                                     // Se for a ultima fala, puxa o ultimo final

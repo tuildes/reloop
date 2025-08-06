@@ -15,8 +15,8 @@ extension LevelModel {
     static let levels: [LevelModel] = [
         LevelModel("2010", "bg1"),
         LevelModel("1980", "bg2"),
-        LevelModel("2080", "bg4"),
-        LevelModel("???", "bg4")
+        LevelModel("2080", "bg2"),
+        LevelModel("???", "bg2")
     ]
 
     private static let sequences: [SequenceModel] = [
@@ -25,9 +25,10 @@ extension LevelModel {
             id: 0,
             modelName: "clock.usdz",
             speech: [
-                SpeechModel("Narrador", "Um cientista se tranca por meses em seu laboratório em busca dos segredos da viagem do tempo\nTodos duvidavam de sua área de pesquisa", true),
-                SpeechModel("Narrador", "Mas o que ninguém sabia, que ele (você), a poucos minutos tinha finalizado a sua nova invenção:\nUm pequeno computador que permitia a volta no tempo, chamado Volta Tempo", true),
-                SpeechModel("Narrador", "Mas existia um pequeno problema...\nVocê não sabe por que, mas existe um buraco na memória, do momento da criação do Volta-Tempo\nE o agora...")
+                SpeechModel("Narrador", "Um cientista se tranca por meses em seu laboratório em busca dos segredos da ~viagem do tempo~\nTodos duvidavam de sua área de pesquisa"),
+                SpeechModel("Narrador", "Um pequeno computador que permitia a volta no tempo, chamado ~Volta Tempo~"),
+                SpeechModel("Narrador", "Mas o que ninguém sabia, que ele (~você~), a poucos minutos tinha finalizado a sua nova invenção"),
+                SpeechModel("Narrador", "Você não sabe por que, mas existe um buraco na memória, do momento da criação do Volta-Tempo\nE o agora..."),
             ],
             yearID: 0
         ),
@@ -38,7 +39,7 @@ extension LevelModel {
             modelName: "clock.usdz",
             speech: [
                 SpeechModel("Você", "Não lembro o que exatamente aconteceu\nMas pelo visto, o Volta Tempo me trocou de era"),
-                SpeechModel("Você", "Esta sala é familiar, está parecendo que é a minha, mas em outro período?")
+                SpeechModel("Você", "Esta sala é familiar, está parecendo que é a minha, mas em outro período?"),
             ],
             yearID: 1
         ),
@@ -47,8 +48,9 @@ extension LevelModel {
             modelName: "guy.usdz",
             speech: [
                 SpeechModel("Narrador", "Ao olhar para frente, você visualiza uma pessoa no centro da sala"),
-                SpeechModel("Narrador", "Ela vira e vê você, se assustando. Ao se virar novamente diz: NÃO DIGITE O QUE ESTÁ NO CARTAZ"),
-                SpeechModel("Narrador", "A figura então mexe com algo no centro da sala\nAntes que você percebe ela já desapareceu"),
+                SpeechModel("Narrador", "Ela vira e vê você, se assustando. Ao se virar novamente diz: ~NÃO DIGITE O QUE ESTÁ NO CARTAZ~", .red),
+                SpeechModel("Narrador", "A figura então mexe com algo no centro da sala"),
+                SpeechModel("Narrador", "Antes que você percebe ela já desapareceu"),
                 SpeechModel("Narrador", "Apesar de toda estranheza, você precisa achar alguma forma de voltar a seu tempo, e talvez esta figura tenha a solução"),
             ],
             yearID: 1
@@ -69,8 +71,8 @@ extension LevelModel {
             id: 4,
             modelName: "journal.usdz",
             speech: [
-                SpeechModel("Narrador", "Ao chegar mais perto do cartaz\nVocê visualiza: 1984"),
-                SpeechModel("Narrador", "Ao olhar mais abaixo existe uma nota\nESQUERDA DIREITA ESQUERDA ESQUERDA"),
+                SpeechModel("Narrador", "Ao chegar mais perto do cartaz\nVocê visualiza: ~1984~"),
+                SpeechModel("Narrador", "Ao olhar mais abaixo existe uma nota\n~ESQUERDA DIREITA ESQUERDA ESQUERDA~"),
                 SpeechModel("Narrador", "Você não entende o que exatamente significa,\nMas para não perder tempo, você para de olhar o cartaz e prossegue sua jornada"),
             ],
             yearID: 1
@@ -81,7 +83,7 @@ extension LevelModel {
             speech: [
                 SpeechModel("Narrador", "Ao olhar ao centro da sala, parece que o VOLTA-TEMPO viajou junto com você"),
                 SpeechModel("Narrador", "Você se aproxima e visualiza que ele pelo jeito está funcionando como deveria\nMas por algum motivo pede uma série de entradas\nde setas ESQUERDA DIREITA"),
-                SpeechModel("Narrador", "Parece que há uma nota no VOLTA-TEMPO\nVeja o cartaz para... [O restante parece rasgado]"),
+                SpeechModel("Narrador", "Parece que há uma nota no VOLTA-TEMPO\nVeja o cartaz para... [~O restante parece rasgado~]"),
             ],
             yearID: 1
         ),
@@ -160,7 +162,7 @@ extension LevelModel {
             modelName: "guy.usdz",
             speech: [
                 SpeechModel("Narrador", "Novamente você visualiza a figura, que antes de você puder falar qualquer coisa diz"),
-                SpeechModel("???", "VOCÊ NÃO SABE O QUE ESTÁ FAZENDO", true),
+                SpeechModel("???", "~VOCÊ NÃO SABE O QUE ESTÁ FAZENDO~", .appPrimary),
                 SpeechModel("Narrador", "Sumindo novamente ao chegar no centro da sala\nVocê se aproxima novamente do computador para tentar achar respostas e voltar a seu tempo"),
                 SpeechModel("Narrador", "Algo tenta falar com você e quando você olha para baixo, é o computador"),
             ],
@@ -185,7 +187,7 @@ extension LevelModel {
             modelName: "pc_robot.usdz",
             speech: [
                 SpeechModel("vTimerOS", "Não faça uma pergunta tola desta!\nVocê mais que ninguém sabe desta respostas"),
-                SpeechModel("vTimerOS", "Mas me diga, o que você realmente quer?", true),
+                SpeechModel("vTimerOS", "Mas me diga, o que você realmente quer?", .appPrimary),
             ],
             choose: ChooseModel("Qual sua pergunta?", [
                 SingleChoose(0, "O que aconteceu aqui? Que anos estamos?", "", "clock.fill", 16),
@@ -236,7 +238,7 @@ extension LevelModel {
             id: 19,
             modelName: "pc_error.usdz",
             speech: [
-                SpeechModel("Narrador", "Você olha para o VOLTA-TEMPO e ele está quebrado, a falta de calibragem explodiu a máquina", true),
+                SpeechModel("Narrador", "Você olha para o VOLTA-TEMPO e ele está quebrado, a falta de calibragem explodiu a máquina", .appPrimary),
             ],
             yearID: 3
         ),
@@ -303,12 +305,12 @@ extension LevelModel {
             id: 25,
             modelName: "pc_error.usdz",
             speech: [
-                SpeechModel("Aviso", "INCONSISTÊNCIAS NO TEMPO ENCONTRADAS\n ALERTA PARA DESTRUIÇÃO DESTA REALIDADE", true),
+                SpeechModel("Aviso", "~INCONSISTÊNCIAS NO TEMPO ENCONTRADAS\nALERTA PARA DESTRUIÇÃO DESTA REALIDADE~", .red),
                 SpeechModel("Você", "Isso poderia estar acontecendo?\nSerá que isso é por conta do que eu mexi para voltar até 2010?"),
                 SpeechModel("Você", "O que eu faço?\n"),
                 SpeechModel("Narrador", "O seu laboratório começa a ser despedaçado pela tentativa do tempo em destruir a realidade inconsistente"),
             ],
-            choose: ChooseModel("Desistir", [
+            choose: ChooseModel("Você quer desistir?", [
                 SingleChoose(0, "Viajar no tempo", "Resolver o que você fez", "clock.fill", 26),
                 SingleChoose(1, "Ficar", "Deixar o mundo explodir", "hammer.fill", 2, true),
             ]),
