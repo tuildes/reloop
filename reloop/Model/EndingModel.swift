@@ -27,7 +27,7 @@ struct EndingModel {
 
 extension EndingModel {
     static let all: [EndingModel] = [
-        EndingModel( // Final exemplo (4)
+        EndingModel(
             id: 0,
             name: "Sarau das máquinas",
             description:
@@ -43,7 +43,7 @@ extension EndingModel {
             modelName: "pc_robot.usdz",
             backgroundImage: "bg4"
         ),
-        EndingModel( // Final exemplo (4)
+        EndingModel(
             id: 1,
             name: "Sem volta",
             description:
@@ -59,7 +59,7 @@ extension EndingModel {
             modelName: "pc_error.usdz",
             backgroundImage: "bg4"
         ),
-        EndingModel( // Final exemplo (4)
+        EndingModel(
             id: 2,
             name: "Limbo",
             description:
@@ -75,7 +75,7 @@ extension EndingModel {
             modelName: "blank.usdz",
             backgroundImage: "bg4"
         ),
-        EndingModel( // Final exemplo (4)
+        EndingModel(
             id: 3,
             name: "Ciclo eterno",
             description:
