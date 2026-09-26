@@ -5,73 +5,70 @@ struct StartView: View {
     @State private var viewModel: StartViewModel?
 
     var body: some View {
-        ZStack {
-            Rectangle()
-                .fill(
-                    LinearGradient(
-                        colors: [.brand, .highlight],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
+        ScanLineLayout {
+            ZStack {
+                LinearGradient(
+                    colors: [.brand, .highlight],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
                 )
-                .ignoresSafeArea()
 
-            GeometryReader { geometry in
-                Image("pattern")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: geometry.size.width, height: geometry.size.height)
-                    .opacity(0.3)
-                    .blendMode(.softLight)
-                    .clipped()
+                GeometryReader { geometry in
+                    Image("pattern")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .opacity(0.3)
+                        .blendMode(.softLight)
+                        .clipped()
+                }
             }
-            .ignoresSafeArea()
-
-            HStack {
-                Image("dvd")
-                    .resizable()
-                    .scaledToFit()
-                    .shadow(color: .black.opacity(0.5), radius: 6, x: -8, y: 8)
-
-                VStack(alignment: .center, spacing: 16) {
-                    Image("logo")
+        } content: {
+            ZStack {
+                HStack {
+                    Image("dvd")
                         .resizable()
                         .scaledToFit()
-                        .padding(.bottom, 24)
+                        .shadow(color: .black.opacity(0.5), radius: 6, x: -8, y: 8)
 
-                    Button {
-                        viewModel?.startGame()
-                    } label: {
-                        Text("Iniciar RELOOP")
-                            .font(.system(size: 24))
-                            .bold()
-                            .foregroundStyle(Color.background)
-                    }
+                    VStack(alignment: .center, spacing: 16) {
+                        Image("logo")
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.bottom, 24)
 
-                    Button {
-                        viewModel?.openCredits()
-                    } label: {
-                        Text("Créditos")
-                            .font(.system(size: 24))
-                            .bold()
-                            .foregroundStyle(Color.background)
+                        Button {
+                            viewModel?.startGame()
+                        } label: {
+                            Text("Iniciar RELOOP")
+                                .font(.system(size: 24))
+                                .bold()
+                                .foregroundStyle(Color.background)
+                        }
+
+                        Button {
+                            viewModel?.openCredits()
+                        } label: {
+                            Text("Créditos")
+                                .font(.system(size: 24))
+                                .bold()
+                                .foregroundStyle(Color.background)
+                        }
                     }
                 }
-            }
-            .padding(64)
+                .padding(64)
 
-            VStack(alignment: .leading) {
-                Spacer()
-                HStack {
-                    Text(viewModel?.version ?? "")
-                        .foregroundStyle(Color.background)
+                VStack(alignment: .leading) {
                     Spacer()
+                    HStack {
+                        Text(viewModel?.version ?? "")
+                            .foregroundStyle(Color.background)
+                        Spacer()
+                    }
+                    .padding(.leading, 36)
+                    .padding(.bottom, 4)
                 }
-                .padding(.leading, 36)
-                .padding(.bottom, 4)
             }
-
-            ScanLine()
         }
         .navigationBarBackButtonHidden()
         .onAppear {

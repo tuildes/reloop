@@ -9,12 +9,7 @@ struct EndingView: View {
     }
 
     var body: some View {
-        ZStack {
-            Color.surface
-                .ignoresSafeArea()
-
-            ScreenBackground(imageName: ending.backgroundImage)
-
+        ScanLineLayout(imageName: ending.backgroundImage) {
             VStack {
                 Text("Final: \(ending.name)")
                     .font(.largeTitle)
@@ -49,8 +44,6 @@ struct EndingView: View {
                 }
             }
             .padding(32)
-
-            ScanLine()
         }
         .navigationBarBackButtonHidden()
     }

@@ -5,12 +5,14 @@ struct GameView: View {
     @State private var viewModel: GameViewModel?
 
     var body: some View {
-        ZStack {
-            Color.surface
-                .ignoresSafeArea()
-
+        Group {
             if let viewModel {
                 gameContent(viewModel)
+            } else {
+                ScanLineLayout(color: .surface) {
+                    ProgressView()
+                        .tint(.white)
+                }
             }
         }
         .navigationBarBackButtonHidden()
@@ -22,44 +24,42 @@ struct GameView: View {
     }
 
     private func gameContent(_ viewModel: GameViewModel) -> some View {
-        ZStack {
-            ScreenBackground(imageName: viewModel.currentLevel.backgroundImage)
-
-            VStack {
-                Spacer()
-                RotationItemView(
-                    rotationAngle: viewModel.motionManager.getAngle(),
-                    modelName: viewModel.currentScene.modelName
-                )
-                .frame(maxWidth: 420, maxHeight: 320)
-                .offset(y: 10)
-                Spacer()
-            }
-            .allowsHitTesting(false)
-
-            VStack {
-                hud(viewModel)
-
-                Spacer()
-
-                if let choose = viewModel.currentChoose {
-                    choiceSection(viewModel, choose: choose)
+        ScanLineLayout(imageName: viewModel.currentLevel.backgroundImage) {
+            ZStack {
+                VStack {
+                    Spacer()
+                    RotationItemView(
+                        rotationAngle: viewModel.motionManager.getAngle(),
+                        modelName: viewModel.currentScene.modelName
+                    )
+                    .frame(maxWidth: 420, maxHeight: 320)
+                    .offset(y: 10)
+                    Spacer()
                 }
+                .allowsHitTesting(false)
 
-                if viewModel.actualSpeech < viewModel.currentScene.speech.count {
-                    let speech = viewModel.currentScene.speech[viewModel.actualSpeech]
-                    TextContent(speech.character, speech.text)
-                        .environment(\.highlightColor, speech.color)
-                        .onTapGesture {
-                            viewModel.advanceSpeech()
-                        }
+                VStack {
+                    hud(viewModel)
+
+                    Spacer()
+
+                    if let choose = viewModel.currentChoose {
+                        choiceSection(viewModel, choose: choose)
+                    }
+
+                    if viewModel.actualSpeech < viewModel.currentScene.speech.count {
+                        let speech = viewModel.currentScene.speech[viewModel.actualSpeech]
+                        TextContent(speech.character, speech.text)
+                            .environment(\.highlightColor, speech.color)
+                            .onTapGesture {
+                                viewModel.advanceSpeech()
+                            }
+                    }
                 }
+                .padding(.top, 36)
+                .padding(.horizontal, 24)
+                .padding(.bottom, 4)
             }
-            .padding(.top, 36)
-            .padding(.horizontal, 24)
-            .padding(.bottom, 4)
-
-            ScanLine()
         }
     }
 

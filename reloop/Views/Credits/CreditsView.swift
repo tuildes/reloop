@@ -4,10 +4,7 @@ struct CreditsView: View {
     @Environment(AppRouter.self) private var router
 
     var body: some View {
-        ZStack {
-            Color.surface
-                .ignoresSafeArea()
-
+        ScanLineLayout(color: .surface) {
             VStack(spacing: 24) {
                 Text("Créditos")
                     .font(.largeTitle)
@@ -28,8 +25,6 @@ struct CreditsView: View {
                 .padding(.top, 16)
             }
             .padding()
-
-            ScanLine()
         }
         .navigationBarBackButtonHidden()
     }
