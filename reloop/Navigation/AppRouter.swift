@@ -1,8 +1,8 @@
-import Combine
 import SwiftUI
 
-final class AppRouter: Router, ObservableObject {
-    @Published var path: NavigationPath = .init()
+@Observable
+final class AppRouter: Router {
+    var path: NavigationPath = .init()
 
     func push(_ screen: Screen) {
         path.append(screen)
@@ -18,8 +18,17 @@ final class AppRouter: Router, ObservableObject {
         path.removeLast(path.count)
     }
 
-    @MainActor
-    func build(screen _: Screen) -> some View {
-        EmptyView()
+    @ViewBuilder
+    func build(screen: Screen) -> some View {
+        switch screen {
+        case .start:
+            StartView()
+        case .game:
+            GameView()
+        case .ending(let id):
+            EndingView(endingID: id)
+        case .credits:
+            CreditsView()
+        }
     }
 }

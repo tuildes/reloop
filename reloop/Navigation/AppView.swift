@@ -1,19 +1,17 @@
 import SwiftUI
 
 struct AppView: View {
-    @StateObject private var router: AppRouter = .init()
+    @State private var router = AppRouter()
 
     var body: some View {
+        @Bindable var router = router
+
         NavigationStack(path: $router.path) {
-            router.build(
-                screen: Screen.start,
-            )
-            .navigationDestination(for: Screen.self) { screen in
-                router.build(
-                    screen: screen
-                )
-            }
+            router.build(screen: .start)
+                .navigationDestination(for: Screen.self) { screen in
+                    router.build(screen: screen)
+                }
         }
-        .environmentObject(router)
+        .environment(router)
     }
 }
