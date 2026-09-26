@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Frequento`s icon" src="reloop/Assets.xcassets/AppIcon.appiconset/logo.png" height="200">
+  <img alt="ReLoop's icon" src=".github/logo.svg" height="200">
   <h3 align="center">ReLoop</h3>
 <p align="center">An interactive time travel game that uses phone movement to make choices.</p>
 
