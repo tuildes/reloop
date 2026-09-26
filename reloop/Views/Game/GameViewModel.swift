@@ -62,8 +62,10 @@ final class GameViewModel {
     private func follow(_ destination: Destination) {
         switch destination {
         case .scene(let id):
-            currentScene = StoryCatalog.sequence(id)
-            actualSpeech = 0
+            withAnimation {
+                currentScene = StoryCatalog.sequence(id)
+                actualSpeech = 0
+            }
         case .ending(let id):
             router.push(.ending(id))
         }

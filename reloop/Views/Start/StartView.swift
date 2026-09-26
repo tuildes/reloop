@@ -40,7 +40,7 @@ struct StartView: View {
                         Button {
                             viewModel?.startGame()
                         } label: {
-                            Text("Iniciar RELOOP")
+                            Text("Iniciar")
                                 .font(.system(size: 24))
                                 .bold()
                                 .foregroundStyle(Color.background)
