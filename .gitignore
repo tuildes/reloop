@@ -63,3 +63,6 @@ fastlane/test_output
 
 # MacOS files
 .DS_STORE
+
+*.xcodeproj
+**/*.plist
