@@ -2,7 +2,6 @@ struct Ending: Identifiable {
     let id: EndingID
     let name: String
     let description: String
-    let hint: String
     let modelName: String
     let backgroundImage: String
 }
@@ -20,9 +19,8 @@ extension Ending {
                 você não pode mais fazer nada, você não pode mais ser nada,
                 você pode existir, contemple o eterno vazio.
                 """,
-            hint: "Hint 1",
             modelName: ModelAsset.pcRobot.rawValue,
-            backgroundImage: "bg4"
+            backgroundImage: "bg_ending"
         ),
         Ending(
             id: .noReturn,
@@ -35,9 +33,8 @@ extension Ending {
                 você não pode mais fazer nada, você não pode mais ser nada,
                 você pode existir, contemple o eterno vazio.
                 """,
-            hint: "Hint 1",
             modelName: ModelAsset.pcError.rawValue,
-            backgroundImage: "bg4"
+            backgroundImage: "bg_ending"
         ),
         Ending(
             id: .limbo,
@@ -50,9 +47,8 @@ extension Ending {
                 você não pode mais fazer nada, você não pode mais ser nada,
                 você pode existir, contemple o eterno vazio.
                 """,
-            hint: "Hint 1",
             modelName: ModelAsset.blank.rawValue,
-            backgroundImage: "bg4"
+            backgroundImage: "bg_ending"
         ),
         Ending(
             id: .eternalCycle,
@@ -62,9 +58,8 @@ extension Ending {
                 Você está fadado a seguir este eterno ciclo
                 [FINAL VERDADEIRO]
                 """,
-            hint: "Hint 1",
             modelName: ModelAsset.clock.rawValue,
-            backgroundImage: "bg4"
+            backgroundImage: "bg_ending"
         ),
     ]
 

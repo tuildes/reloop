@@ -15,9 +15,14 @@ struct ScanLineLayout<Background: View, Content: View>: View {
 
     var body: some View {
         ZStack {
+            Color.black
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .ignoresSafeArea()
+            
             background
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .ignoresSafeArea()
+                .opacity(0.75)
 
             content
 

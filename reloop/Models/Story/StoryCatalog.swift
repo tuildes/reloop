@@ -6,8 +6,8 @@ struct StoryCatalog {
     static let eras: [Level] = [
         Level(id: .y2010, name: "2010", backgroundImage: "bg1"),
         Level(id: .y1980, name: "1980", backgroundImage: "bg2"),
-        Level(id: .y2080, name: "2080", backgroundImage: "bg2"),
-        Level(id: .unknown, name: "???", backgroundImage: "bg2"),
+        Level(id: .y2080, name: "2080", backgroundImage: "bg3"),
+        Level(id: .unknown, name: "???", backgroundImage: "bg4"),
     ]
 
     private static let allDefinitions: [SceneDefinition] =
