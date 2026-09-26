@@ -1,0 +1,28 @@
+name: reloop
+
+settings:
+  base:
+    ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: YES
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+
+targets:
+  reloop:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - reloop
+    info:
+      path: reloop/Info.plist
+      properties:
+        CFBundleDisplayName: ReLoop
+        LSApplicationCategoryType: public.app-category.adventure-games
+        UILaunchScreen: {}
+        UIRequiresFullScreen: YES
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationLandscapeLeft
+    settings:
+      base:
+        # ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        MARKETING_VERSION: "2.0"
+        PRODUCT_BUNDLE_IDENTIFIER: dev.tuildes.reloop
