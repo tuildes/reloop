@@ -2,72 +2,56 @@ import SwiftUI
 
 struct EndingView: View {
     @Environment(AppRouter.self) private var router
-    let endingID: Int
+    let endingID: EndingID
 
-    @State private var viewModel: EndingViewModel?
-
-    var body: some View {
-        Group {
-            if let viewModel {
-                endingContent(viewModel)
-            }
-        }
-        .navigationBarBackButtonHidden()
-        .onAppear {
-            if viewModel == nil {
-                viewModel = EndingViewModel(endingID: endingID, router: router)
-            }
-        }
+    private var ending: Ending {
+        Ending.ending(id: endingID)
     }
 
-    @ViewBuilder
-    private func endingContent(_ viewModel: EndingViewModel) -> some View {
-        GeometryReader { geometry in
-            ZStack {
-                Image(viewModel.ending.backgroundImage)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: geometry.size.width, height: geometry.size.height)
-                    .clipped()
-                    .ignoresSafeArea()
+    var body: some View {
+        ZStack {
+            Color.surface
+                .ignoresSafeArea()
 
-                VStack {
-                    Text("Final \(viewModel.ending.id + 1): **\(viewModel.ending.name)**")
-                        .font(.largeTitle)
+            ScreenBackground(imageName: ending.backgroundImage)
+
+            VStack {
+                Text("Final: \(ending.name)")
+                    .font(.largeTitle)
+                    .bold()
+                    .foregroundStyle(.white)
+                    .padding()
+
+                Spacer()
+
+                HStack(alignment: .center, spacing: 16) {
+                    RotationItemView(
+                        rotationAngle: 20 * .pi / 180,
+                        modelName: ending.modelName
+                    )
+                    .frame(width: 200, height: 200)
+                    .scaleEffect(1.5)
+
+                    Text(ending.description)
                         .foregroundStyle(.white)
-                        .padding()
-
-                    Spacer()
-
-                    HStack {
-                        RotationItemView(
-                            rotationAngle: 20 * .pi / 180,
-                            modelName: viewModel.ending.modelName
-                        )
-                        .frame(width: 200, height: 200)
-                        .padding()
-                        .scaleEffect(1.5)
-
-                        Text(viewModel.ending.description)
-                            .padding()
-                            .foregroundStyle(.white)
-                    }
-
-                    Spacer()
-
-                    HStack {
-                        Spacer()
-                        Button("Sair") {
-                            viewModel.leave()
-                        }
-                        .foregroundStyle(.white)
-                    }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                .padding(32)
-                .frame(width: geometry.size.width, height: geometry.size.height)
+                .padding(.horizontal)
 
-                ScanLine()
+                Spacer()
+
+                HStack {
+                    Spacer()
+                    Button("Sair") {
+                        router.popToRoot()
+                    }
+                    .foregroundStyle(.white)
+                }
             }
+            .padding(32)
+
+            ScanLine()
         }
+        .navigationBarBackButtonHidden()
     }
 }

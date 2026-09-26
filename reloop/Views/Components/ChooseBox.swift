@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ChooseBox: View {
-    let choose: SingleChoose
+    let choose: ChoiceOption
     let angle: Double
 
     var body: some View {

@@ -5,36 +5,37 @@ struct GameView: View {
     @State private var viewModel: GameViewModel?
 
     var body: some View {
-        Group {
+        ZStack {
+            Color.surface
+                .ignoresSafeArea()
+
             if let viewModel {
                 gameContent(viewModel)
             }
         }
         .navigationBarBackButtonHidden()
-        .onAppear {
+        .task {
             if viewModel == nil {
                 viewModel = GameViewModel(router: router)
             }
         }
     }
 
-    @ViewBuilder
     private func gameContent(_ viewModel: GameViewModel) -> some View {
         ZStack {
-            Image(viewModel.currentLevel.backgroundImage)
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
+            ScreenBackground(imageName: viewModel.currentLevel.backgroundImage)
 
             VStack {
                 Spacer()
                 RotationItemView(
                     rotationAngle: viewModel.motionManager.getAngle(),
-                    modelName: viewModel.actualSequenceModel.modelName
+                    modelName: viewModel.currentScene.modelName
                 )
+                .frame(maxWidth: 420, maxHeight: 320)
                 .offset(y: 10)
                 Spacer()
             }
+            .allowsHitTesting(false)
 
             VStack {
                 hud(viewModel)
@@ -45,8 +46,8 @@ struct GameView: View {
                     choiceSection(viewModel, choose: choose)
                 }
 
-                if viewModel.actualSpeech < viewModel.actualSequenceModel.speech.count {
-                    let speech = viewModel.actualSequenceModel.speech[viewModel.actualSpeech]
+                if viewModel.actualSpeech < viewModel.currentScene.speech.count {
+                    let speech = viewModel.currentScene.speech[viewModel.actualSpeech]
                     TextContent(speech.character, speech.text)
                         .environment(\.highlightColor, speech.color)
                         .onTapGesture {
@@ -62,13 +63,11 @@ struct GameView: View {
         }
     }
 
-    @ViewBuilder
     private func hud(_ viewModel: GameViewModel) -> some View {
         HStack {
-            HStack {
-                Text(viewModel.currentLevel.name)
-            }
-            .frame(width: 60)
+            Text(viewModel.currentLevel.name)
+                .foregroundStyle(.white)
+                .frame(width: 60, alignment: .leading)
 
             if let choose = viewModel.currentChoose {
                 Spacer()

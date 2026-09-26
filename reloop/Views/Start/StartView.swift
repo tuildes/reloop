@@ -48,12 +48,6 @@ struct StartView: View {
                             .foregroundStyle(Color.background)
                     }
 
-                    Text("Finais")
-                        .font(.system(size: 24))
-                        .bold()
-                        .foregroundStyle(Color.background)
-                        .opacity(0.2)
-
                     Button {
                         viewModel?.openCredits()
                     } label: {
@@ -61,14 +55,7 @@ struct StartView: View {
                             .font(.system(size: 24))
                             .bold()
                             .foregroundStyle(Color.background)
-                            .opacity(0.2)
                     }
-
-                    Text("Trocar idioma: PT-BR")
-                        .font(.system(size: 24))
-                        .bold()
-                        .foregroundStyle(Color.background)
-                        .opacity(0.2)
                 }
             }
             .padding(64)

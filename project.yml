@@ -28,5 +28,4 @@ targets:
           - UIInterfaceOrientationLandscapeLeft
     settings:
       base:
-        # ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         PRODUCT_BUNDLE_IDENTIFIER: dev.tuildes.reloop

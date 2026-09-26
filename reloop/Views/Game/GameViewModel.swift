@@ -2,13 +2,10 @@ import SwiftUI
 
 @Observable
 final class GameViewModel {
-    let levels: [Level] = Level.levels
     let motionManager = MotionManager()
 
-    var actualSequence: Int = 0
-    var actualSequenceModel: Sequence = Level.startSequence()
+    var currentScene: Sequence = StoryCatalog.startSequence()
     var actualSpeech: Int = 0
-    var actualLevel: Int = 0
 
     private let router: AppRouter
 
@@ -17,20 +14,16 @@ final class GameViewModel {
     }
 
     var currentLevel: Level {
-        guard actualLevel >= 0, actualLevel < levels.count else {
-            return levels[0]
-        }
-        return levels[actualLevel]
+        StoryCatalog.level(for: currentScene.era)
     }
 
     var isShowingChoices: Bool {
-        actualSpeech == actualSequenceModel.speech.count
-            && actualSequenceModel.choose != nil
+        actualSpeech == currentScene.speech.count && currentScene.choose != nil
     }
 
     var currentChoose: Choose? {
         guard isShowingChoices else { return nil }
-        return actualSequenceModel.choose
+        return currentScene.choose
     }
 
     var canConfirmChoice: Bool {
@@ -42,25 +35,15 @@ final class GameViewModel {
     }
 
     func advanceSpeech() {
-        guard actualSpeech < actualSequenceModel.speech.count else { return }
+        guard actualSpeech < currentScene.speech.count else { return }
 
-        if actualSpeech == actualSequenceModel.speech.count - 1 {
-            if actualSequence == Level.sequenceLastIndex() {
-                router.push(.ending(3))
-                return
-            }
-
-            if actualSequenceModel.choose != nil {
+        if actualSpeech == currentScene.speech.count - 1 {
+            if currentScene.choose != nil {
                 withAnimation {
                     actualSpeech += 1
                 }
             } else {
-                withAnimation {
-                    actualSequenceModel = Level.nextSequence(actualSequence)
-                    actualLevel = actualSequenceModel.yearID
-                    actualSequence = actualSequenceModel.id
-                    actualSpeech = 0
-                }
+                follow(currentScene.next)
             }
         } else {
             withAnimation {
@@ -70,21 +53,19 @@ final class GameViewModel {
     }
 
     func confirmChoice() {
-        guard let choose = actualSequenceModel.choose else { return }
+        guard let choose = currentScene.choose else { return }
         let chooseIndex = trunc(motionManager.actualAngle) > 15 ? 0 : 1
         guard chooseIndex < choose.chooses.count else { return }
+        follow(choose.chooses[chooseIndex].destination)
+    }
 
-        let selected = choose.chooses[chooseIndex]
-
-        if selected.isNextSequenceEnding {
-            router.push(.ending(selected.nextSequence))
-        } else {
-            withAnimation {
-                actualSequenceModel = Level.chooseSequence(actualSequenceModel, selected.id)
-                actualSequence = actualSequenceModel.id
-                actualLevel = actualSequenceModel.yearID
-                actualSpeech = 0
-            }
+    private func follow(_ destination: Destination) {
+        switch destination {
+        case .scene(let id):
+            currentScene = StoryCatalog.sequence(id)
+            actualSpeech = 0
+        case .ending(let id):
+            router.push(.ending(id))
         }
     }
 }

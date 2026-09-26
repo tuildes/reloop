@@ -1,32 +1,16 @@
-struct Ending {
-    let id: Int
+struct Ending: Identifiable {
+    let id: EndingID
     let name: String
     let description: String
     let hint: String
     let modelName: String
     let backgroundImage: String
-
-    init(
-        id: Int,
-        name: String,
-        description: String,
-        hint: String,
-        modelName: String,
-        backgroundImage: String
-    ) {
-        self.id = id
-        self.name = name
-        self.description = description
-        self.hint = hint
-        self.modelName = modelName
-        self.backgroundImage = backgroundImage
-    }
 }
 
 extension Ending {
     static let all: [Ending] = [
         Ending(
-            id: 0,
+            id: .machines,
             name: "Sarau das máquinas",
             description: """
                 Você não fez nada, as inconsistências do tempo destruíram seu mundo,
@@ -37,11 +21,11 @@ extension Ending {
                 você pode existir, contemple o eterno vazio.
                 """,
             hint: "Hint 1",
-            modelName: "pc_robot.usdz",
+            modelName: ModelAsset.pcRobot.rawValue,
             backgroundImage: "bg4"
         ),
         Ending(
-            id: 1,
+            id: .noReturn,
             name: "Sem volta",
             description: """
                 Você não fez nada, as inconsistências do tempo destruíram seu mundo,
@@ -52,11 +36,11 @@ extension Ending {
                 você pode existir, contemple o eterno vazio.
                 """,
             hint: "Hint 1",
-            modelName: "pc_error.usdz",
+            modelName: ModelAsset.pcError.rawValue,
             backgroundImage: "bg4"
         ),
         Ending(
-            id: 2,
+            id: .limbo,
             name: "Limbo",
             description: """
                 Você não fez nada, as inconsistências do tempo destruíram seu mundo,
@@ -67,11 +51,11 @@ extension Ending {
                 você pode existir, contemple o eterno vazio.
                 """,
             hint: "Hint 1",
-            modelName: "blank.usdz",
+            modelName: ModelAsset.blank.rawValue,
             backgroundImage: "bg4"
         ),
         Ending(
-            id: 3,
+            id: .eternalCycle,
             name: "Ciclo eterno",
             description: """
                 Você descobriu o porque agora
@@ -79,12 +63,12 @@ extension Ending {
                 [FINAL VERDADEIRO]
                 """,
             hint: "Hint 1",
-            modelName: "clock.usdz",
+            modelName: ModelAsset.clock.rawValue,
             backgroundImage: "bg4"
         ),
     ]
 
-    static func ending(id: Int) -> Ending {
+    static func ending(id: EndingID) -> Ending {
         all.first { $0.id == id } ?? all[0]
     }
 }
